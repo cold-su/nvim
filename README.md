@@ -1,12 +1,33 @@
 <div align="center">
 
-一套紧凑、开箱即用的现代 Neovim 配置。
+<h1>Neovim</h1>
 
-[English](README_EN.md) / [中文](README.md)
+<p>一套紧凑、开箱即用的现代 Neovim 配置</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Neovim-%3E%3D%200.11-57A143?style=flat-square&logo=neovim&logoColor=white" alt="Neovim >= 0.11">
+  <img src="https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua&logoColor=white" alt="Lua">
+  <img src="https://img.shields.io/badge/Plugin_Manager-lazy.nvim-7E57C2?style=flat-square" alt="lazy.nvim">
+  <img src="https://img.shields.io/badge/Platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
+</p>
+
+<p><a href="README_EN.md">English</a> / <strong>中文</strong></p>
+
+<p>
+  <a href="#features">特性</a> ·
+  <a href="#installation">安装</a> ·
+  <a href="#lsp">LSP</a> ·
+  <a href="#keymaps">键位</a> ·
+  <a href="#plugins">插件</a>
+</p>
 
 </div>
 
-## 特性
+---
+
+<a id="features"></a>
+
+## ✨ 特性
 
 - 基于 `lazy.nvim` 的插件管理与按需加载
 - 基于 Neovim 原生 API 的 LSP，按文件类型通过 Mason 自动安装
@@ -16,7 +37,7 @@
 - 浮动文件树、FZF 搜索、Git hunk、浮动终端、Markdown 预览与渲染
 - 自定义状态栏、折叠、渐变浮窗边框、代码片段和文件类型行为
 
-## 环境要求
+## 📦 环境要求
 
 - 最新稳定版 Neovim（建议 `>= 0.11`）
 - `git`
@@ -30,10 +51,14 @@
 export PYTHON="$(command -v python3)"
 ```
 
-LSP Server、Biome 和 Tree-sitter parser 无需手动逐个安装，首次打开对应文件时会自动安装。
+> [!TIP]
+> LSP Server、Biome 和 Tree-sitter parser 无需手动逐个安装，首次打开对应文件时会自动安装。
 
-## 安装
+<a id="installation"></a>
 
+## 🚀 安装
+
+> [!WARNING]
 > 安装前请备份现有的 `~/.config/nvim`。
 
 ```bash
@@ -56,7 +81,7 @@ nvim
 :StartupTime   " 启动性能分析
 ```
 
-## 目录结构
+## 🗂️ 目录结构
 
 ```text
 .
@@ -76,7 +101,9 @@ nvim
 └── lazy-lock.json           # 插件版本锁
 ```
 
-## LSP 与格式化
+<a id="lsp"></a>
+
+## 🔧 LSP 与格式化
 
 | 文件类型 | LSP Server | 格式化 |
 | --- | --- | --- |
@@ -110,7 +137,9 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 
 诊断信息会在 `CursorHold` 时以浮窗显示；LSP semantic tokens 被禁用，以保持自定义高亮一致。
 
-## 全局键位
+<a id="keymaps"></a>
+
+## ⌨️ 全局键位
 
 ### 基础编辑
 
@@ -173,7 +202,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 
 手动折叠和 undo 历史会持久化到 `cache/`，重新打开文件时恢复光标位置和视图。
 
-## 搜索、补全与 AI
+## 🔍 搜索、补全与 AI
 
 ### FZF-Lua
 
@@ -209,7 +238,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Insert | `Right` | 接受建议；无建议时正常右移 |
 | Insert | `Ctrl-Up` / `Ctrl-Down` | 上一个 / 下一个建议 |
 
-## 文件树、Git 与终端
+## 🌲 文件树、Git 与终端
 
 ### Nvim Tree
 
@@ -247,7 +276,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 
 `F5` 支持 JavaScript、TypeScript、HTML、Python、Go、shell、Lua、Java、C 和 Markdown。窄窗口使用底部终端，宽窗口使用居中浮窗。
 
-## Markdown 与文件类型增强
+## 📝 Markdown 与文件类型增强
 
 ### Markdown
 
@@ -271,20 +300,22 @@ Markdown 使用 2 空格缩进，并高亮任务起始日期 `S:YYYY-MM-DD`、�
 - Vue：Visual `D` 包裹为 `<!-- ... -->`。
 - Snippets：覆盖通用、TypeScript/JavaScript/Vue、Go、HTML、Markdown、SQL、Vim、systemd 和 desktop 文件。
 
-## 其他插件
+<a id="plugins"></a>
+
+## 🧩 其他插件
 
 | 插件 | 用途 |
 | --- | --- |
 | [yaocccc/visual-multi.nvim](https://github.com/yaocccc/visual-multi.nvim) | 多光标编辑 |
 | [yaocccc/babel.nvim](https://github.com/yaocccc/babel.nvim) | `mm` 翻译当前词或选区为中文 |
-| [Mr-LLLLL/interestingwords.nvim](https://github.com/Mr-LLLLL/interestingwords.nvim) | `ff` 高亮当前词，`FF` 清除全部 |
-| [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim) | `:CccPick` 颜色选择，`:CccHighlighterEnable` 颜色高亮 |
 | [yaocccc/vim-comment](https://github.com/yaocccc/vim-comment) | Normal `??` 行注释；Visual `/` 行注释、`?` 块注释 |
 | [yaocccc/vim-surround](https://github.com/yaocccc/vim-surround) | 添加、修改、删除包围字符 |
 | [yaocccc/vim-echo](https://github.com/yaocccc/vim-echo) | Visual `C` 为 JS/TS/Vue 插入 `console.log` |
 | [yaocccc/vim-fcitx2en](https://github.com/yaocccc/vim-fcitx2en) | 离开 Insert 模式时切换英文输入法 |
 | [yaocccc/nvim-lines.lua](https://github.com/yaocccc/nvim-lines.lua) | 状态栏与标签栏 |
 | [yaocccc/nvim-foldsign](https://github.com/yaocccc/nvim-foldsign) | Sign column 折叠标记 |
+| [Mr-LLLLL/interestingwords.nvim](https://github.com/Mr-LLLLL/interestingwords.nvim) | `ff` 高亮当前词，`FF` 清除全部 |
+| [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim) | `:CccPick` 颜色选择，`:CccHighlighterEnable` 颜色高亮 |
 | [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim) | 缩进参考线 |
 | [yianwillis/vimcdoc](https://github.com/yianwillis/vimcdoc) | 中文帮助文档 |
 
@@ -302,6 +333,8 @@ Markdown 使用 2 空格缩进，并高亮任务起始日期 `S:YYYY-MM-DD`、�
 | `q` | 移除当前区域 |
 | `Esc` | 清除多光标 |
 
-## 许可
+---
+
+## 📄 许可
 
 本仓库为个人配置，欢迎参考、Fork 和按需修改。

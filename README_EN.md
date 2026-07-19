@@ -1,12 +1,33 @@
 <div align="center">
 
-A compact, batteries-included modern Neovim configuration.
+<h1>Neovim</h1>
 
-[English](README_EN.md) / [中文](README.md)
+<p>A compact, batteries-included modern Neovim configuration</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Neovim-%3E%3D%200.11-57A143?style=flat-square&logo=neovim&logoColor=white" alt="Neovim >= 0.11">
+  <img src="https://img.shields.io/badge/Lua-2C2D72?style=flat-square&logo=lua&logoColor=white" alt="Lua">
+  <img src="https://img.shields.io/badge/Plugin_Manager-lazy.nvim-7E57C2?style=flat-square" alt="lazy.nvim">
+  <img src="https://img.shields.io/badge/Platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
+</p>
+
+<p><strong>English</strong> / <a href="README.md">中文</a></p>
+
+<p>
+  <a href="#features">Features</a> ·
+  <a href="#installation">Installation</a> ·
+  <a href="#lsp">LSP</a> ·
+  <a href="#keymaps">Keymaps</a> ·
+  <a href="#plugins">Plugins</a>
+</p>
 
 </div>
 
-## Features
+---
+
+<a id="features"></a>
+
+## ✨ Features
 
 - Plugin management and lazy loading with `lazy.nvim`
 - Native Neovim LSP with on-demand Mason installation by filetype
@@ -16,7 +37,7 @@ A compact, batteries-included modern Neovim configuration.
 - Floating file tree, FZF search, Git hunks, floating terminal, and Markdown preview/rendering
 - Custom statusline, folds, gradient floating borders, snippets, and filetype behavior
 
-## Requirements
+## 📦 Requirements
 
 - Latest stable Neovim (`>= 0.11` recommended)
 - `git`
@@ -30,10 +51,14 @@ A compact, batteries-included modern Neovim configuration.
 export PYTHON="$(command -v python3)"
 ```
 
-LSP servers, Biome, and Tree-sitter parsers are installed automatically when a matching filetype is opened.
+> [!TIP]
+> LSP servers, Biome, and Tree-sitter parsers are installed automatically when a matching filetype is opened.
 
-## Installation
+<a id="installation"></a>
 
+## 🚀 Installation
+
+> [!WARNING]
 > Back up your existing `~/.config/nvim` first.
 
 ```bash
@@ -56,7 +81,7 @@ Useful maintenance commands:
 :StartupTime   " Profile startup time
 ```
 
-## Structure
+## 🗂️ Structure
 
 ```text
 .
@@ -76,7 +101,9 @@ Useful maintenance commands:
 └── lazy-lock.json           # Plugin lockfile
 ```
 
-## LSP and Formatting
+<a id="lsp"></a>
+
+## 🔧 LSP and Formatting
 
 | Filetypes | LSP Server | Formatting |
 | --- | --- | --- |
@@ -110,7 +137,9 @@ Biome is auto-installed for JavaScript, TypeScript, and JSON/JSONC. Tailwind LSP
 
 Diagnostics open in a floating window on `CursorHold`. LSP semantic tokens are disabled to preserve the custom highlight scheme.
 
-## Global Keymaps
+<a id="keymaps"></a>
+
+## ⌨️ Global Keymaps
 
 ### General Editing
 
@@ -173,7 +202,7 @@ In command-line mode, `Ctrl-a` / `Ctrl-e` jump to the beginning/end, while `Up` 
 
 Manual folds and undo history persist under `cache/`. Cursor position and views are restored when files reopen.
 
-## Search, Completion, and AI
+## 🔍 Search, Completion, and AI
 
 ### FZF-Lua
 
@@ -209,7 +238,7 @@ Sources: `lsp`, `path`, `snippets`, `buffer`, `ripgrep`, `datword` (`word.txt`),
 | Insert | `Right` | Accept a suggestion, or move right if none is visible |
 | Insert | `Ctrl-Up` / `Ctrl-Down` | Previous / next suggestion |
 
-## File Tree, Git, and Terminal
+## 🌲 File Tree, Git, and Terminal
 
 ### Nvim Tree
 
@@ -247,7 +276,7 @@ Copy, cut, paste, delete, filtering, and other actions retain Nvim Tree's defaul
 
 `F5` supports JavaScript, TypeScript, HTML, Python, Go, shell, Lua, Java, C, and Markdown. Narrow windows use a bottom terminal; wide windows use a centered float.
 
-## Markdown and Filetype Enhancements
+## 📝 Markdown and Filetype Enhancements
 
 ### Markdown
 
@@ -271,20 +300,22 @@ Markdown uses two-space indentation and highlights task start dates (`S:YYYY-MM-
 - Vue: Visual `D` wraps with `<!-- ... -->`.
 - Snippets cover general, TypeScript/JavaScript/Vue, Go, HTML, Markdown, SQL, Vim, systemd, and desktop files.
 
-## Additional Plugins
+<a id="plugins"></a>
+
+## 🧩 Additional Plugins
 
 | Plugin | Purpose |
 | --- | --- |
 | [yaocccc/visual-multi.nvim](https://github.com/yaocccc/visual-multi.nvim) | Multiple cursors |
 | [yaocccc/babel.nvim](https://github.com/yaocccc/babel.nvim) | Translate the current word or selection into Chinese with `mm` |
-| [Mr-LLLLL/interestingwords.nvim](https://github.com/Mr-LLLLL/interestingwords.nvim) | Highlight the current word with `ff`; clear all with `FF` |
-| [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim) | Color picker with `:CccPick`; color highlighting with `:CccHighlighterEnable` |
 | [yaocccc/vim-comment](https://github.com/yaocccc/vim-comment) | Normal `??` for line comments; Visual `/` for line and `?` for block comments |
 | [yaocccc/vim-surround](https://github.com/yaocccc/vim-surround) | Add, change, and delete surroundings |
 | [yaocccc/vim-echo](https://github.com/yaocccc/vim-echo) | Insert `console.log` for JS/TS/Vue with Visual `C` |
 | [yaocccc/vim-fcitx2en](https://github.com/yaocccc/vim-fcitx2en) | Switch to English input on InsertLeave |
 | [yaocccc/nvim-lines.lua](https://github.com/yaocccc/nvim-lines.lua) | Statusline and tabline |
 | [yaocccc/nvim-foldsign](https://github.com/yaocccc/nvim-foldsign) | Fold signs in the sign column |
+| [Mr-LLLLL/interestingwords.nvim](https://github.com/Mr-LLLLL/interestingwords.nvim) | Highlight the current word with `ff`; clear all with `FF` |
+| [uga-rosa/ccc.nvim](https://github.com/uga-rosa/ccc.nvim) | Color picker with `:CccPick`; color highlighting with `:CccHighlighterEnable` |
 | [nvimdev/indentmini.nvim](https://github.com/nvimdev/indentmini.nvim) | Indent guides |
 | [yianwillis/vimcdoc](https://github.com/yianwillis/vimcdoc) | Chinese help documentation |
 
@@ -302,6 +333,8 @@ Markdown uses two-space indentation and highlights task start dates (`S:YYYY-MM-
 | `q` | Remove the current region |
 | `Esc` | Clear multiple cursors |
 
-## License
+---
+
+## 📄 License
 
 This is a personal configuration; feel free to learn from it, fork it, and adapt it.
