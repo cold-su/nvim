@@ -3,7 +3,8 @@ local M = {}
 function GitInfo()
     local branch = vim.b.gitsigns_head or ''
     local diff = vim.b.gitsigns_status or ''
-    return (string.len(branch) > 0 and string.format(" %s ", branch) or " none ") .. (string.len(diff) > 0 and string.format('%s ', vim.fn.trim(diff)) or '')
+    return (string.len(branch) > 0 and string.format(" %s ", branch) or " none ") ..
+    (string.len(diff) > 0 and string.format('%s ', vim.fn.trim(diff)) or '')
 end
 
 function ErrCount()
@@ -30,48 +31,33 @@ function M.init_line()
     vim.cmd('au VimEnter * hi VimLine_Other ctermfg=245 guifg=#8a8a8a')
 end
 
-function M.init_mc()
-    vim.g.VM_theme = 'ocean'
-    vim.g.VM_highlight_matches = 'underline'
-    vim.g.VM_maps = {
-        ['Find Under'] = '<C-n>',
-        ['Find Subword Under'] = '<C-n>',
-        ['Select All'] = '<C-d>',
-        ['Select h'] = '<C-Left>',
-        ['Select l'] = '<C-Right>',
-        ['Add Cursor Up'] = '<C-Up>',
-        ['Add Cursor Down'] = '<C-Down>',
-        ['Add Cursor At Pos'] = '<C-x>',
-        ['Add Cursor At Word'] = '<C-w>',
-        ['Move Left'] = '<C-S-Left>',
-        ['Move Right'] = '<C-S-Right>',
-        ['Remove Region'] = 'q',
-        ['Increase'] = '+',
-        ['Decrease'] = '_',
-        ["Undo"] = 'u',
-        ["Redo"] = '<C-r>',
-        ["I Return"] = '',
-        ["I Up Arrow"] = '',
-        ["I Down Arrow"] = '',
-        ["I Left Arrow"] = '',
-        ["I Right Arrow"] = '',
-    }
-end
-
 function M.init_comment()
     vim.g.vim_line_comments = {
-        vim = '"', vimrc = '"',
-        js = '//', ts = '//', java = '//', class = '//', c = '//', h = '//', go = '//', proto = '//', ['go.mod'] = '//', vue = '//', sol = '//',
-        lua = '--', sql = '--', md = '[^_^]:',
+        vim = '"',
+        vimrc = '"',
+        js = '//',
+        ts = '//',
+        java = '//',
+        class = '//',
+        c = '//',
+        h = '//',
+        go = '//',
+        proto = '//',
+        ['go.mod'] = '//',
+        vue = '//',
+        sol = '//',
+        lua = '--',
+        sql = '--',
+        md = '[^_^]:',
     }
     vim.g.vim_chunk_comments = {
-        js = {'/**', ' *', ' */'},
-        ts = {'/**', ' *', ' */'},
-        sh = {':<<!', '', '!'},
-        proto = {'/**', ' *', ' */'},
-        md = {'[^_^]:', '    ', ''},
-        vue = {'/**', ' *', ' */'},
-        sol = {'/**', ' *', ' */'},
+        js = { '/**', ' *', ' */' },
+        ts = { '/**', ' *', ' */' },
+        sh = { ':<<!', '', '!' },
+        proto = { '/**', ' *', ' */' },
+        md = { '[^_^]:', '    ', '' },
+        vue = { '/**', ' *', ' */' },
+        sol = { '/**', ' *', ' */' },
     }
     vim.keymap.set('n', '??', ':NToggleComment<cr>', { silent = true, noremap = true })
     vim.keymap.set('v', '/', ':<c-u>VToggleComment<cr>', { silent = true, noremap = true })
@@ -94,13 +80,14 @@ function M.config_iw()
     iw.setup({
         colors = { '#aeee55', '#aa5522', '#225488', '#088823', '#eed724', '#bb3c7b', '#5478c0', '#047a89', '#a84247', '#ccf2e5' },
         search_count = false,
-        navigation = true,
-        scroll_center = true,
+        navigation = false,
+        scroll_center = false,
         color_key = "ff",
         cancel_color_key = "FF",
     })
     -- 自行搜索时，取消所有高亮
-    vim.api.nvim_create_autocmd("CmdlineEnter", { pattern = {"/", "?" }, callback = function() iw.UncolorAllWords(false) end })
+    vim.api.nvim_create_autocmd("CmdlineEnter",
+        { pattern = { "/", "?" }, callback = function() iw.UncolorAllWords(false) end })
 end
 
 return {
@@ -108,11 +95,11 @@ return {
     { "yianwillis/vimcdoc", event = "CmdLineEnter" },
     { "uga-rosa/ccc.nvim", cmd = { 'CccPick', 'CccHighlighterEnable' }, opts = {} },
     { "Mr-LLLLL/interestingwords.nvim", keys = { 'ff', 'FF' }, config = M.config_iw },
-    { "mg979/vim-visual-multi", event = 'CursorHold', init = M.init_mc },
     { "yaocccc/nvim-lines.lua", init = M.init_line },
     { "yaocccc/vim-comment", cmd = { "NToggleComment", "VToggleComment", "CToggleComment" }, init = M.init_comment },
     { "yaocccc/nvim-foldsign", event = 'CursorHold', opts = { foldsigns = { open = '', close = '', seps = { '│', '┃' } } } },
     { "yaocccc/vim-surround", event = 'ModeChanged' },
+    { "yaocccc/visual-multi.nvim", event = "VeryLazy", opts = {} },
     { "yaocccc/vim-fcitx2en", event = 'InsertLeavePre' },
     { "yaocccc/vim-echo", cmd = "VECHO", init = M.init_echo },
     { "iamcco/markdown-preview.nvim", build = "cd app && npm install", ft = 'markdown', init = M.init_mp },
@@ -144,25 +131,10 @@ return {
         end
     },
     {
-        -- "acidsugarx/babel.nvim",
         "yaocccc/babel.nvim",
         version = "*",
         config = M.config_tt,
         keys = { 'mm' },
         opts = { target = "zh", keymaps = { translate = "mm", translate_word = "mm" }, border = require("ui/gradient_border").get() }
     },
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = { jump = { autojump = true, register = true }, modes = { char = { enabled = false } } },
-        init = function()
-            vim.api.nvim_set_hl(0, 'FlashBackdrop', { fg = '#6e6e6e' })
-            vim.api.nvim_set_hl(0, 'FlashLabel', { fg = '#ff007c', bold = true })
-            vim.api.nvim_set_hl(0, 'FlashMatch', { fg = '#5fd7ff', underline = true })
-            vim.api.nvim_set_hl(0, 'FlashCurrent', { fg = '#ffd700', bold = true })
-        end,
-        keys = {
-            { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-        },
-    }
 }
