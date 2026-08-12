@@ -1,4 +1,4 @@
-require('ui/highlights')  -- 配色
+-- require('ui/highlights')  -- 旧的手写配色，已由 catppuccin mocha 取代（见 lua/plugins/catppuccin.lua）
 vim.g.python3_host_prog = os.getenv('PYTHON') -- export PYTHON=$(which python3)
 vim.g.editorconfig = false
 vim.opt.termguicolors = true
@@ -53,7 +53,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, { command = [[if &buftype == '' && &
 vim.api.nvim_create_autocmd({ "BufReadPost" }, { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]] })
 vim.api.nvim_create_autocmd({ "FileType" }, { command = "try | silent! loadview | catch | endtry" })
 vim.api.nvim_create_autocmd({ "BufLeave", "BufWinLeave" }, { command = "silent! mkview" })
-vim.api.nvim_create_autocmd({ "InsertEnter" }, { command = "hi CursorLine ctermbg=235 guibg=#262626" })
+vim.api.nvim_create_autocmd({ "InsertEnter" }, { command = "hi CursorLine ctermbg=236 guibg=#313244" })
 vim.api.nvim_create_autocmd({ "InsertLeave" }, { command = "hi CursorLine ctermbg=none guibg=none" })
 
 -- 展示FoldText的方法

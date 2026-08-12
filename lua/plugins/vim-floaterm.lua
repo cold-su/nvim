@@ -54,7 +54,7 @@ function M.config()
     vim.g.floaterm_autoclose = 0
     vim.g.floaterm_opener = 'edit'
     vim.cmd("au BufEnter * if &buftype == 'terminal' | :call timer_start(50, { -> execute('startinsert!') }, { 'repeat': 3 }) | endif")
-    vim.cmd("hi FloatermBorder ctermfg=fg ctermbg=none")
+    vim.cmd("hi FloatermBorder guifg=fg")
 
     M.setFTToggleMap('<c-t>', 'TERM', '')
     vim.keymap.set('n', '<F5>', ':lua require("plugins/vim-floaterm").M.runFile()<cr>', { silent = true, noremap = true })
