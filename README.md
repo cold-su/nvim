@@ -11,8 +11,6 @@
   <img src="https://img.shields.io/badge/Platform-Linux-FCC624?style=flat-square&logo=linux&logoColor=black" alt="Linux">
 </p>
 
-<p><a href="README_EN.md">English</a> / <strong>中文</strong></p>
-
 <p>
   <a href="#features">特性</a> ·
   <a href="#installation">安装</a> ·
@@ -172,6 +170,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Visual | `t` / `T` | 下划线与驼峰互转；`T` 首字母大写 |
 | Insert | `(` `[` `{` `"` `'` `` ` `` | 自动补全配对字符 |
 | Insert | `Backspace` | 成对删除括号或引号 |
+| Normal、Insert、Visual | `Shift+WheelUp` / `Shift+WheelDown` | 横向滚动 |
 
 命令行模式中 `Ctrl-a` / `Ctrl-e` 跳到首尾，`Up` / `Down` 浏览历史。
 

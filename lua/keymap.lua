@@ -143,6 +143,12 @@ vim.keymap.set({ 'n', 'i', 'v' }, '<c-s-left>',  '<home>', opts('Ctrl-Shift-Left
 vim.keymap.set({ 'n', 'i' }, '<c-s-right>', '<end>', opts('Ctrl-Shift-Right 句尾'))
 vim.keymap.set('v', '<c-s-right>', '<end>h', opts('Ctrl-Shift-Right 句尾')) -- visual模式下，避免选中行尾的换行符
 
+local HSCROLL_COLUMNS = 4 -- 每次滚动的列数
+vim.keymap.set({ 'n', 'v' }, '<S-ScrollWheelUp>', HSCROLL_COLUMNS .. 'zh', opts('Shift+滚轮 向左横向滚动'))
+vim.keymap.set({ 'n', 'v' }, '<S-ScrollWheelDown>', HSCROLL_COLUMNS .. 'zl', opts('Shift+滚轮 向右横向滚动'))
+vim.keymap.set('i', '<S-ScrollWheelUp>', '<C-o>' .. HSCROLL_COLUMNS .. 'zh', opts('Shift+滚轮 向左横向滚动'))
+vim.keymap.set('i', '<S-ScrollWheelDown>', '<C-o>' .. HSCROLL_COLUMNS .. 'zl', opts('Shift+滚轮 向右横向滚动'))
+
 vim.keymap.set('n', '<m-a>', 'ggVG', opts('选中全文'))
 vim.keymap.set('n', '<c-u>', 'cc<Esc>', opts('Ctrl-u 清空一行'))
 vim.keymap.set('i', '<c-u>', '<Esc>cc', opts('Ctrl-u 清空一行'))
