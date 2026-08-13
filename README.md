@@ -44,6 +44,7 @@
 - 推荐安装 Nerd Font
 - 搜索与预览工具：`ripgrep`、`fd`、`bat`
 - Node.js 与 npm：用于部分 LSP 和构建 Markdown Preview
+- `tree-sitter-cli`
 - `F5` 可选运行时：`node`、`ts-node`、`python`、`go`、`bash`、`lua`、`javac`、`gcc`、`google-chrome-stable`
 - 可选 Python provider：设置 `PYTHON` 环境变量
 
