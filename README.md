@@ -40,7 +40,7 @@
 - 最新稳定版 Neovim（建议 `>= 0.11`）
 - `git`
 - 推荐安装 Nerd Font
-- 搜索与预览工具：`ripgrep`、`fd`、`bat`
+- 搜索与预览工具：`ripgrep`、`fd`、`bat`、`fzf`
 - Node.js 与 npm：用于部分 LSP 和构建 Markdown Preview
 - `tree-sitter-cli`
 - `F5` 可选运行时：`node`、`ts-node`、`python`、`go`、`bash`、`lua`、`javac`、`gcc`、`google-chrome-stable`
@@ -79,9 +79,6 @@ nvim
 :TSUpdate      " 更新 parser
 :StartupTime   " 启动性能分析
 ```
-
-要完整使用本软件，还需以下依赖：
-- fzf
 
 ## 🗂️ 目录结构
 
@@ -150,7 +147,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Normal、Visual | `;` | 输入命令（`:`） |
 | Normal | `,` | 执行寄存器 `q` 中的宏 |
 | Normal | `\` | 清除搜索高亮 |
-| Normal | `\` `Tab` | 将空格转换为 tab |
+| Normal | `\`、`Tab` | 将空格转换为 tab |
 | Normal | `Enter` | 光标位于匹配项时清除高亮，否则正常回车 |
 | Normal | `+` / `_` | 数字自增 / 自减 |
 | Normal | `Backspace` | 删除当前词并进入插入 |
@@ -175,7 +172,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Insert | `(` `[` `{` `"` `'` `` ` `` | 自动补全配对字符 |
 | Insert | `Backspace` | 成对删除括号或引号 |
 | Normal、Insert、Visual | `Shift+WheelUp` / `Shift+WheelDown` | 横向滚动 |
-| Normal Visual | Ctrl-/ | 注释 |
+| Normal、Visual | Ctrl-/ | 注释 |
 
 命令行模式中 `Ctrl-a` / `Ctrl-e` 跳到首尾，`Up` / `Down` 浏览历史。
 
