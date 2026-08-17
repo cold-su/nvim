@@ -61,7 +61,7 @@ export PYTHON="$(command -v python3)"
 > 安装前请备份现有的 `~/.config/nvim`。
 
 ```bash
-git clone https://github.com/yaocccc/nvim ~/.config/nvim
+git clone https://github.com/cold-su/nvim ~/.config/nvim
 nvim
 ```
 
@@ -79,6 +79,9 @@ nvim
 :TSUpdate      " 更新 parser
 :StartupTime   " 启动性能分析
 ```
+
+要完整使用本软件，还需以下依赖：
+- fzf
 
 ## 🗂️ 目录结构
 
@@ -147,6 +150,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Normal、Visual | `;` | 输入命令（`:`） |
 | Normal | `,` | 执行寄存器 `q` 中的宏 |
 | Normal | `\` | 清除搜索高亮 |
+| Normal | `\` `Tab` | 将空格转换为 tab |
 | Normal | `Enter` | 光标位于匹配项时清除高亮，否则正常回车 |
 | Normal | `+` / `_` | 数字自增 / 自减 |
 | Normal | `Backspace` | 删除当前词并进入插入 |
@@ -162,7 +166,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Visual | `p`、`P` | 粘贴并保留原寄存器 |
 | Visual | `<`、`Shift-Tab` | 左缩进并保持选区 |
 | Visual | `>`、`Tab` | 右缩进并保持选区 |
-| Normal、Insert、Visual | `Alt-Up` / `Alt-Down` | 上下移动行或选区 |
+| Normal、Insert、Visual | `Alt-Shift-Up` / `Alt-Shift-Down` | 上下移动行或选区 |
 | Normal | `Alt-a` | 全选 |
 | Normal、Insert | `Ctrl-u` | 清空当前行 |
 | Normal | `Space` | 在首列、首个非空字符、行尾间跳转 |
@@ -171,6 +175,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Insert | `(` `[` `{` `"` `'` `` ` `` | 自动补全配对字符 |
 | Insert | `Backspace` | 成对删除括号或引号 |
 | Normal、Insert、Visual | `Shift+WheelUp` / `Shift+WheelDown` | 横向滚动 |
+| Normal Visual | Ctrl-/ | 注释 |
 
 命令行模式中 `Ctrl-a` / `Ctrl-e` 跳到首尾，`Up` / `Down` 浏览历史。
 
@@ -308,7 +313,7 @@ Markdown 使用 2 空格缩进，并高亮任务起始日期 `S:YYYY-MM-DD`、�
 | --- | --- |
 | [yaocccc/visual-multi.nvim](https://github.com/yaocccc/visual-multi.nvim) | 多光标编辑 |
 | [yaocccc/babel.nvim](https://github.com/yaocccc/babel.nvim) | `mm` 翻译当前词或选区为中文 |
-| [yaocccc/vim-comment](https://github.com/yaocccc/vim-comment) | Normal `??` 行注释；Visual `/` 行注释、`?` 块注释 |
+| [yaocccc/vim-comment](https://github.com/yaocccc/vim-comment) | ~~Normal `??` 行注释；Visual `/` 行注释、`?` 块注释~~ |
 | [yaocccc/vim-surround](https://github.com/yaocccc/vim-surround) | 添加、修改、删除包围字符 |
 | [yaocccc/vim-echo](https://github.com/yaocccc/vim-echo) | Visual `C` 为 JS/TS/Vue 插入 `console.log` |
 | [yaocccc/vim-fcitx2en](https://github.com/yaocccc/vim-fcitx2en) | 离开 Insert 模式时切换英文输入法 |

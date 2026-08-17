@@ -1,82 +1,82 @@
 local function opts(msg, extra)
-    if not extra then return { desc = msg, noremap = true, silent = true } end
-    return vim.tbl_extend('force', { desc = msg, noremap = true, silent = true }, extra)
+	if not extra then return { desc = msg, noremap = true, silent = true } end
+	return vim.tbl_extend('force', { desc = msg, noremap = true, silent = true }, extra)
 end
 
 local function magic_save() -- 1 当目录不存在时 先创建目录, 2 当前文件是acwrite时, 用sudo保存
-    if vim.fn.empty(vim.fn.glob(vim.fn.expand('%:p:h'))) then vim.fn.system('mkdir -p ' .. vim.fn.expand('%:p:h')) end
-    if vim.o.buftype == 'acwrite' then
-        vim.fn.execute('w !sudo tee > /dev/null %')
-    else
-        vim.fn.execute('w')
-    end
+	if vim.fn.empty(vim.fn.glob(vim.fn.expand('%:p:h'))) then vim.fn.system('mkdir -p ' .. vim.fn.expand('%:p:h')) end
+	if vim.o.buftype == 'acwrite' then
+		vim.fn.execute('w !sudo tee > /dev/null %')
+	else
+		vim.fn.execute('w')
+	end
 end
 
 local function magic_move() -- 光标在$ 0 ^依次跳转
-    local first = 1
-    local head = #vim.fn.getline('.') - #vim.fn.substitute(vim.fn.getline('.'), '^\\s*', '', 'G') + 1
-    local before = vim.fn.col('.')
-    vim.fn.execute(before == first and first ~= head and 'norm! ^' or 'norm! $')
-    local after = vim.fn.col('.')
-    if before == after then
-        vim.fn.execute('norm! 0')
-    end
+	local first = 1
+	local head = #vim.fn.getline('.') - #vim.fn.substitute(vim.fn.getline('.'), '^\\s*', '', 'G') + 1
+	local before = vim.fn.col('.')
+	vim.fn.execute(before == first and first ~= head and 'norm! ^' or 'norm! $')
+	local after = vim.fn.col('.')
+	if before == after then
+		vim.fn.execute('norm! 0')
+	end
 end
 
 local function magic_togglehump(upperCase) -- 驼峰转换
-    vim.fn.execute('normal! gv"tx')
-    local w = vim.fn.getreg('t')
-    local toHump = w:find('_') ~= nil
-    if toHump then
-        w = w:gsub('_(%w)', function(c) return c:upper() end)
-    else
-        w = w:gsub('(%u)', function(c) return '_' .. c:lower() end)
-    end
-    if w:sub(1, 1) == '_' then w = w:sub(2) end
-    if upperCase then w = w:sub(1,1):upper() .. w:sub(2) end
-    vim.fn.setreg('t', w)
-    vim.fn.execute('normal! "tP')
+	vim.fn.execute('normal! gv"tx')
+	local w = vim.fn.getreg('t')
+	local toHump = w:find('_') ~= nil
+	if toHump then
+		w = w:gsub('_(%w)', function(c) return c:upper() end)
+	else
+		w = w:gsub('(%u)', function(c) return '_' .. c:lower() end)
+	end
+	if w:sub(1, 1) == '_' then w = w:sub(2) end
+	if upperCase then w = w:sub(1,1):upper() .. w:sub(2) end
+	vim.fn.setreg('t', w)
+	vim.fn.execute('normal! "tP')
 end
 
 local magic_insertpair = function(char) -- 自动配对括号和引号
-    local pair_close = { ['('] = ')', ['['] = ']', ['{'] = '}' }
-    local close_set = { [')'] = true, [']'] = true, ['}'] = true, ['"'] = true, ["'"] = true, ['`'] = true }
-    local quote_set = { ['"'] = true, ["'"] = true, ['`'] = true }
-    local col = vim.fn.col('.')
-    local after = vim.api.nvim_get_current_line():sub(col, col)
-    local should_pair = after == '' or after == ';' or close_set[after]
+	local pair_close = { ['('] = ')', ['['] = ']', ['{'] = '}' }
+	local close_set = { [')'] = true, [']'] = true, ['}'] = true, ['"'] = true, ["'"] = true, ['`'] = true }
+	local quote_set = { ['"'] = true, ["'"] = true, ['`'] = true }
+	local col = vim.fn.col('.')
+	local after = vim.api.nvim_get_current_line():sub(col, col)
+	local should_pair = after == '' or after == ';' or close_set[after]
 
-    if pair_close[char] then
-        if should_pair then return char .. pair_close[char] .. '<Left>' end
-        return char
-    end
+	if pair_close[char] then
+		if should_pair then return char .. pair_close[char] .. '<Left>' end
+		return char
+	end
 
-    if after == char then return '<Right>' end
-    if quote_set[char] and should_pair then return char .. char .. '<Left>' end
-    return char
+	if after == char then return '<Right>' end
+	if quote_set[char] and should_pair then return char .. char .. '<Left>' end
+	return char
 end
 
 local function magic_delpair() -- 删除成对的括号和引号
-    local line, col = vim.api.nvim_get_current_line(), vim.fn.col('.')
-    if col > 1 and vim.tbl_contains({ ')', ']', '}', '"', "'", '`' }, line:sub(col, col))
-        and vim.tbl_contains({ '(', '[', '{', '"', "'", '`' }, line:sub(col - 1, col - 1)) then
-        return '<Del><BS>'
-    end
-    return '<BS>'
+	local line, col = vim.api.nvim_get_current_line(), vim.fn.col('.')
+	if col > 1 and vim.tbl_contains({ ')', ']', '}', '"', "'", '`' }, line:sub(col, col))
+		and vim.tbl_contains({ '(', '[', '{', '"', "'", '`' }, line:sub(col - 1, col - 1)) then
+		return '<Del><BS>'
+	end
+	return '<BS>'
 end
 
 local function magic_enter() -- 光标在搜索匹配上时按回车取消高亮，否则正常回车
-    if vim.v.hlsearch == 1 and vim.fn.getreg('/') ~= '' then
-        local pos = vim.fn.searchpos(vim.fn.getreg('/'), 'bcnW')
-        if pos[1] == vim.fn.line('.') and pos[2] > 0 then
-            if vim.fn.matchend(vim.fn.getline('.'), vim.fn.getreg('/'), pos[2] - 1) >= vim.fn.col('.') then
-                vim.cmd('nohlsearch')
-                return
-            end
-        end
-    end
-    local cr = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
-    vim.api.nvim_feedkeys(cr, 'n', false)
+	if vim.v.hlsearch == 1 and vim.fn.getreg('/') ~= '' then
+		local pos = vim.fn.searchpos(vim.fn.getreg('/'), 'bcnW')
+		if pos[1] == vim.fn.line('.') and pos[2] > 0 then
+			if vim.fn.matchend(vim.fn.getline('.'), vim.fn.getreg('/'), pos[2] - 1) >= vim.fn.col('.') then
+				vim.cmd('nohlsearch')
+				return
+			end
+		end
+	end
+	local cr = vim.api.nvim_replace_termcodes('<CR>', true, false, true)
+	vim.api.nvim_feedkeys(cr, 'n', false)
 end
 
 vim.keymap.set('n', 's', '<nop>', opts('禁用s键，避免误触'))
@@ -117,12 +117,12 @@ vim.keymap.set('v', '<', '<gv', opts('左缩进'))
 vim.keymap.set('v', '>', '>gv', opts('右缩进'))
 vim.keymap.set('v', '<s-tab>', '<gv', opts('左缩进'))
 vim.keymap.set('v', '<tab>', '>gv', opts('右缩进'))
-vim.keymap.set('n', '<m-up>', ':m .-2<cr>', opts('Alt-Up 向上移动当前行'))
-vim.keymap.set('n', '<m-down>', ':m .+1<cr>', opts('Alt-Down 向下移动当前行'))
-vim.keymap.set('i', '<m-up>', '<Esc>:m .-2<cr>i', opts('Alt-Up 向上移动当前行'))
-vim.keymap.set('i', '<m-down>', '<Esc>:m .+1<cr>i', opts('Alt-Down 向下移动当前行'))
-vim.keymap.set('v', '<m-up>', ":m '<-2<cr>gv", opts('Alt-Up 向上移动选中行'))
-vim.keymap.set('v', '<m-down>', ":m '>+1<cr>gv", opts('Alt-Down 向下移动选中行'))
+vim.keymap.set('n', '<m-s-up>', ':m .-2<cr>', opts('Alt-Up 向上移动当前行'))
+vim.keymap.set('n', '<m-s-down>', ':m .+1<cr>', opts('Alt-Down 向下移动当前行'))
+vim.keymap.set('i', '<m-s-up>', '<Esc>:m .-2<cr>i', opts('Alt-Up 向上移动当前行'))
+vim.keymap.set('i', '<m-s-down>', '<Esc>:m .+1<cr>i', opts('Alt-Down 向下移动当前行'))
+vim.keymap.set('v', '<m-s-up>', ":m '<-2<cr>gv", opts('Alt-Up 向上移动选中行'))
+vim.keymap.set('v', '<m-s-down>', ":m '>+1<cr>gv", opts('Alt-Down 向下移动选中行'))
 
 vim.keymap.set('v', '<s-right>', 'e', opts('shift + 右 词尾'))
 vim.keymap.set('i', '<s-right>', '<esc>ea', opts('shift + 右 词尾'))
@@ -175,6 +175,7 @@ vim.keymap.set({ 'v', 'i' }, '<m-right>', '<esc>:bn<cr>', opts('切换到下一�
 
 vim.keymap.set('n', 'tt', ':below 10sp | term<cr>a', opts('打开一个10行大小的终端'))
 vim.keymap.set('n', '\\w', function() return vim.o.wrap and ':set nowrap<cr>' or ':set wrap<cr>' end, opts('切换是否wrap', { expr = true }))
+vim.keymap.set('n', '\\<tab>', ':%retab! -indentonly<cr>', opts('把空格缩进转换为tab'));
 
 vim.keymap.set('n', '-', function() return vim.fn.foldlevel('.') > 0 and 'za' or 'va{zf^' end, opts('折叠/展开', { expr = true }))
 vim.keymap.set('v', '-', 'zf', opts('折叠选中行'))
@@ -187,15 +188,15 @@ vim.keymap.set('v', 'T', function() magic_togglehump(true) end, opts('驼峰转�
 vim.keymap.set('v', 't', function() magic_togglehump(false) end, opts('驼峰转换（首字母小写）'))
 
 for _, c in ipairs({ '(', '[', '{', ')', ']', '}', '"', "'", '`' }) do
-    vim.keymap.set('i', c, function() return magic_insertpair(c) end, { expr = true, noremap = true })
+	vim.keymap.set('i', c, function() return magic_insertpair(c) end, { expr = true, noremap = true })
 end
 vim.keymap.set('i', '<BS>', magic_delpair, { expr = true, noremap = true })
 
 -- 对外提供，供命令行直接调用设置bar不显示
 function G_toggleBar(status)
-    vim.cmd('set laststatus=' .. status)
-    vim.cmd('set showtabline=' .. status)
-    if status == 0 then
-        vim.o.winbar = ' '
-    end
+	vim.cmd('set laststatus=' .. status)
+	vim.cmd('set showtabline=' .. status)
+	if status == 0 then
+		vim.o.winbar = ' '
+	end
 end
