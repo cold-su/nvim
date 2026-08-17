@@ -147,15 +147,15 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Normal、Visual | `;` | 输入命令（`:`） |
 | Normal | `,` | 执行寄存器 `q` 中的宏 |
 | Normal | `\` | 清除搜索高亮 |
-| Normal | `\`、`Tab` | 将空格转换为 tab |
+| Normal | `\-tab` | 将空格转换为 tab |
 | Normal | `Enter` | 光标位于匹配项时清除高亮，否则正常回车 |
 | Normal | `+` / `_` | 数字自增 / 自减 |
 | Normal | `Backspace` | 删除当前词并进入插入 |
 | Insert | `Ctrl-h` | 删除到词首 |
 | Normal、Insert | `Ctrl-j` | 从下一个逗号处断行 |
 | Normal、Visual | `Ctrl-s` | 交互式替换 |
-| Normal、Visual | `S` | 智能保存：创建目录，必要时 sudo |
-| Normal | `Q` | 强制退出 |
+| Normal、Visual | `Ctrl-s` | 智能保存：创建目录，必要时 sudo |
+| Normal | `Ctrl-q` | 强制退出 |
 | Normal | `R` | 重载当前文件 |
 | Normal | `W` | 关闭当前 Buffer |
 | Normal | `x` | 删除字符且不覆盖剪贴板 |
@@ -172,7 +172,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | Insert | `(` `[` `{` `"` `'` `` ` `` | 自动补全配对字符 |
 | Insert | `Backspace` | 成对删除括号或引号 |
 | Normal、Insert、Visual | `Shift+WheelUp` / `Shift+WheelDown` | 横向滚动 |
-| Normal、Visual | Ctrl-/ | 注释 |
+| Normal、Visual | `Ctrl-/` | 注释 |
 
 命令行模式中 `Ctrl-a` / `Ctrl-e` 跳到首尾，`Up` / `Down` 浏览历史。
 
@@ -211,7 +211,7 @@ JavaScript、TypeScript、JSON/JSONC 文件会自动安装 Biome。Tailwind LSP 
 | 键 | 功能 |
 | --- | --- |
 | `Ctrl-p` | 项目文件 |
-| `Ctrl-a` | 全局文本搜索 |
+| `Ctrl-f` | 全局文本搜索 |
 | `Ctrl-b` | Buffer 列表 |
 | `Ctrl-l` | 当前 Buffer 行搜索 |
 | `Ctrl-g` | Git 变更文件 |

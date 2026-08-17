@@ -84,7 +84,7 @@ vim.keymap.set({ 'n', 'v' }, ';', ':', opts('将;键映射为:，方便输入命
 vim.keymap.set('n', ',', '@q', opts(',执行宏q'))
 vim.keymap.set('n', '\\', ':nohlsearch<CR>', opts('按\\取消高亮搜索'))
 vim.keymap.set('n', '<CR>', magic_enter, opts('搜索高亮时回车取消高亮'))
-vim.keymap.set('n', '+', '<c-a>', opts('+ = ctrl-a'))
+-- vim.keymap.set('n', '+', '<c-a>', opts('+ = ctrl-a'))
 vim.keymap.set('n', '_', '<c-x>', opts('- = ctrl-x'))
 vim.keymap.set('n', '<bs>', '"_ciw', opts('快速删除'))
 vim.keymap.set('i', '<c-h>', function() return vim.fn.col('.') == vim.fn.col('$') and '<esc>"_db"_xa' or '<esc>"_db"_xi' end, opts('快速删除', { expr = true }))
@@ -97,8 +97,8 @@ vim.keymap.set('c', '<c-e>', '<end>', opts('命令行模式 Ctrl-e 跳转到行�
 vim.keymap.set('c', '<up>', '<c-p>', opts('命令行模式 Up 键历史命令'))
 vim.keymap.set('c', '<down>', '<c-n>', opts('命令行模式 Down 键历史命令'))
 
-vim.keymap.set('n', '<c-s>', ':<c-u>%s/\\v//gc<left><left><left><left>', opts('快捷替换'))
-vim.keymap.set('v', '<c-s>', ':s/\\v//gc<left><left><left><left>', opts('快捷替换'))
+-- vim.keymap.set('n', '<c-s>', ':<c-u>%s/\\v//gc<left><left><left><left>', opts('快捷替换'))
+-- vim.keymap.set('v', '<c-s>', ':s/\\v//gc<left><left><left><left>', opts('快捷替换'))
 
 vim.keymap.set('v', '<BS>', '"_d', opts('执行但不影响剪切板'))
 vim.keymap.set('n', 'x', '"_x', opts('执行但不影响剪切板'))
@@ -108,9 +108,9 @@ vim.keymap.set('v', 'c', '"_c', opts('执行但不影响剪切板'))
 vim.keymap.set('v', 'p', 'pgvy', opts('执行但不影响剪切板'))
 vim.keymap.set('v', 'P', 'Pgvy', opts('执行但不影响剪切板'))
 
-vim.keymap.set('n', 'S', magic_save, opts('保存文件'))
-vim.keymap.set('v', 'S', magic_save, opts('保存文件'))
-vim.keymap.set('n', 'Q', ':q!<cr>', opts('强制退出'))
+vim.keymap.set('n', '<c-s>', magic_save, opts('保存文件'))
+vim.keymap.set('v', '<c-s>', magic_save, opts('保存文件'))
+vim.keymap.set('n', '<c-q>', ':q!<cr>', opts('强制退出'))
 vim.keymap.set('n', 'R', ':e %<cr>', opts('重新加载当前文件'))
 
 vim.keymap.set('v', '<', '<gv', opts('左缩进'))
@@ -149,7 +149,7 @@ vim.keymap.set({ 'n', 'v' }, '<S-ScrollWheelDown>', HSCROLL_COLUMNS .. 'zl', opt
 vim.keymap.set('i', '<S-ScrollWheelUp>', '<C-o>' .. HSCROLL_COLUMNS .. 'zh', opts('Shift+滚轮 向左横向滚动'))
 vim.keymap.set('i', '<S-ScrollWheelDown>', '<C-o>' .. HSCROLL_COLUMNS .. 'zl', opts('Shift+滚轮 向右横向滚动'))
 
-vim.keymap.set('n', '<m-a>', 'ggVG', opts('选中全文'))
+vim.keymap.set('n', '<c-a>', 'ggVG', opts('选中全文'))
 vim.keymap.set('n', '<c-u>', 'cc<Esc>', opts('Ctrl-u 清空一行'))
 vim.keymap.set('i', '<c-u>', '<Esc>cc', opts('Ctrl-u 清空一行'))
 
